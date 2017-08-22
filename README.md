@@ -9,11 +9,10 @@
     .
     ├── README.md
     │   └── controllers
-    │   │   └── books.js
+    │   │   └── bookController.js
     │   └── routes
     │   │   └── books.js
     │   │   └── index.js
-    │   │   └── users.js
     ├── package.json
     ├── app.js
 
