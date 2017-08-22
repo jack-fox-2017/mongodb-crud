@@ -8,9 +8,9 @@ Route | HTTP | Description
 ------|------|------------
 `/api/books` | POST | Create a book
 `/api/books` | GET | Get all the books
-`/api/books/:id` | GET | Get a single book
-`/api/books/:id` | DELETE | Delete a book
-`/api/books/:id` | PUT | Update a book with new info
+`/api/books/:isbn` | GET | Get a single book by ISBN
+`/api/books/:isbn` | DELETE | Delete a book by ISBN
+`/api/books/:isbn` | PUT | Update a book by ISBN with new info
 
 
 ## Usage
