@@ -71,9 +71,23 @@ var updatebook = function (req,res) {
   })
 }
 
+var readbookByTitle = function (req,res) {
+  MongoClient.connect(url, function(err,db){
+    var collection = db.collection('library');
+    collection.find({title:req.params.title}).toArray(function (err,result){
+      if (!err){
+        res.send(result)
+      } else {
+        res.send(err)
+      }
+    })
+  })
+}
+
 module.exports = {
   insertbook,
   readbook,
   deletebook,
-  updatebook
+  updatebook,
+  readbookByTitle
 };
