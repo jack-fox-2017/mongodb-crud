@@ -1,19 +1,8 @@
-const MongoClient = require('mongodb').MongoClient
-const url = 'mongodb://localhost:27017/library';
-
-
 class Book {
-  constructor(data) {
-    this.id = data._id
-    this.isbn = data.isbn
-    this.title = data.title
-    this.author = data.author
-    this.category = data.category
-    this.stock = data.stock
-  }
+  constructor() {}
 
-  static findAll(cb) {
-    MongoClient.connect(url, (err, db) => {
+  static findAll(mongo, url, cb) {
+    mongo.connect(url, (err, db) => {
       if (err) {
         throw err
       }
@@ -30,8 +19,8 @@ class Book {
     })
   }
 
-  static createData(dataForm) {
-    MongoClient.connect(url, (err, db) => {
+  static createData(mongo, url, dataForm, cb) {
+    mongo.connect(url, (err, db) => {
       if (err) {
         throw err
       }
@@ -42,26 +31,40 @@ class Book {
           author: dataForm.author,
           category: dataForm.category,
           stock: dataForm.stock
+        }, (err, result) => {
+          if (err) {
+            cb(true, null)
+          }
+          else {
+            cb(false, result)
+          }
         })
       }
     })
   }
 
-  static removeData(object, id) {
-    MongoClient.connect(url, (err, db) => {
+  static removeData(mongo, url, object, id, cb) {
+    mongo.connect(url, (err, db) => {
       if (err) {
         throw err
       }
       else {
         db.collection('books').remove({
           _id: object(id)
+        }, (err, result) => {
+          if (err) {
+            cb(true, null)
+          }
+          else {
+            cb(false, result)
+          }
         })
       }
     })
   }
 
-  static updateData(object, id, dataForm) {
-    MongoClient.connect(url, (err, db) => {
+  static updateData(mongo, url, object, id, dataForm, cb) {
+    mongo.connect(url, (err, db) => {
       if (err) {
         throw err
       }
@@ -74,6 +77,13 @@ class Book {
           author: dataForm.author,
           category: dataForm.category,
           stock: dataForm.stock
+        }, (err, result) => {
+          if (err) {
+            cb(true, null)
+          }
+          else {
+            cb(false, result)
+          }
         })
       }
     })
