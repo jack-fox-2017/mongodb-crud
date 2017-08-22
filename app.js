@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mongoclient = require('mongodb').MongoClient
 var assert = require('assert');
 var index = require('./routes/index');
-var users = require('./routes/users');
+var books = require('./routes/books');
 var url = 'mongodb://localhost:27017/library';
 
 mongoclient.connect(url, (err, db) => {
@@ -32,7 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/api', books);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
